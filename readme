@@ -1,4 +1,14 @@
-Steps:
-1. Generate the source
-2. Generate the observe data
-3. run the main.c
+Method 1: Utilize the GUI Interface
+To begin the inversion process, execute the "Shavi-1.0.py" script located in the "bin" directory. 
+The GUI provides a user-friendly interface, making the implementation easier. Refer to the tutorial 
+link available in the help section for step-by-step instructions on how to use the GUI effectively.
+
+Method 2: Direct Access to Code
+Alternatively, you can directly access the code by running the "fwi.exe" executable also present in 
+the "bin" directory. 
+
+Inversion requires you to have the necessary files, including parameter, source information, 
+acquisition geometry, and observed data.
+
+Furthermore, a folder named "synthetic data generator" is provided, which offers a useful tool to produce 
+synthetic data for synthetic models.

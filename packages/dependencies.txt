@@ -1,0 +1,9 @@
+tkinter
+matplotlib
+numpy
+sys
+threading
+xlsxwriter
+pandas
+webbrowser
+shutil

@@ -23,9 +23,21 @@ tool easier but also lets you analyze results in real-time.
 - [License](#license)
 
 ## Installation
+#### Prerequisites
+1. [GNU Compiler Collection (GCC)](https://www.guru99.com/c-gcc-install.html)
+2. [Python 3.0.0](https://www.python.org/downloads/)
+3. [pip](https://pip.pypa.io/en/stable/installation/)
 
-What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
-
+Access the command prompt or terminal and proceed with the following steps.
+#### Clone the repository
+```
+git clone https://github.com/vatsvikki/ShaVi-1.0.git
+```
+#### Module installation
+```
+cd path_to_repository/packages
+pip install -r dependencies.txt
+```
 ## Usage
 
 Provide instructions and examples for use. Include screenshots as needed.

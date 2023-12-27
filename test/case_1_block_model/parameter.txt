@@ -1,0 +1,17 @@
+number_sample	500
+sampling_intrvl	0.001
+depth_model	50
+lateral_model	100
+grid_space	10.0
+depth_source	3
+depth_receiver	3
+number_src  8
+number_rcr  76
+processors	1
+max_iteration   40	
+boundary_key	1
+absorb_lay  8
+obj_fun_l2_1 1
+upper_avoid 3
+bound_avoid 11 
+data_order_rm_1  1

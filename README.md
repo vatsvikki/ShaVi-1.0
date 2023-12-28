@@ -133,7 +133,13 @@ The necessary data for the inversion process is located in the folder labeled
 
 #### Case 2: Marmousi Model
 
+![marmousi_model](https://github.com/vatsvikki/ShaVi-1.0/assets/50227308/02e7d247-a4f1-4836-8f82-74323428ab43)
 
+Refer to the tutorial for detailed information on data specifications.
+
+#### Case 3: Overthrust Model
+
+![marmousi_model](https://github.com/vatsvikki/ShaVi-1.0/assets/50227308/02e7d247-a4f1-4836-8f82-74323428ab43)
 
 Refer to the tutorial for detailed information on data specifications.
 

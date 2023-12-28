@@ -2,12 +2,12 @@
 
 ## Description
 
-Full waveform inversion (FWI) is a technique used in studying underground struc
-tures through seismic data. It helps create a detailed image of what’s beneath the
+Full waveform inversion (FWI) is a technique used in studying underground structures through seismic data. 
+It helps create a detailed image of what’s beneath the
 Earth’s surface. However, implementing FWI can be tough due to its complex math
-and high computational demands. To make it easier, we made ShaVi-1.0, a 2D acous-
-tic FWI tool. It uses OpenMP API to handle computations and has a user-friendly
+and high computational demands. To make it easier, we made ShaVi-1.0, a 2D acoustic FWI tool. It uses OpenMP API to handle computations and has a user-friendly
 interface for easy use on regular computers.
+
 ShaVi-1.0’s core code is in C language, designed so users can adjust parts as needed.
 The Graphical User Interface (GUI), made in Python, comes with handy features like
 real-time plotting and updates on the process status. It also has message and warning

@@ -57,8 +57,7 @@ This Command will launch the interface of Shavi-1.0 as shown in figure.
 
 ## Features
 
-package consists of
-four primary windows and buttons to interact with the package, as marked in the figure of interface, each offering distinct utilities to enhance the user’s implementation experience.
+The package consists of four primary windows and buttons to interact with the package, as marked in the figure of interface, each offering distinct utilities to enhance the user’s implementation experience.
 These windows are outlined below:
 
 #### Data Input: Window 1

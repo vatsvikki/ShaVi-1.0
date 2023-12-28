@@ -131,6 +131,12 @@ The necessary data for the inversion process is located in the folder labeled
 |Receiver Locations| receiver.txt       |
 |   Parameters     |    parameter.txt   |
 
+#### Case 2: Marmousi Model
+
+
+
+Refer to the tutorial for detailed information on data specifications.
+
 ## Credits
 
 List your collaborators, if any, with links to their GitHub profiles.

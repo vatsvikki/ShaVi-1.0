@@ -45,7 +45,7 @@ Provide instructions and examples for use. Include screenshots as needed.
 To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
 
     
-    ![image](/assets/images/figure_1.png)
+    ![image]([/assets/images/figure_1.png](https://github.com/vatsvikki/ShaVi-1.0/blob/main/assets/images/figure_1.png))
     
 
 ## Features

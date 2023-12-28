@@ -40,10 +40,10 @@ pip install -r dependencies.txt
 ```
 ## Usage
 
-Provide instructions and examples for use. Include screenshots as needed.
-
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
-
+Navigate to the `src` folder and compile the `main.c`
+```
+gcc main.c -lm -fopenmp -o ../bin/fwi
+```
     
    [ ![figure_1](https://github.com/vatsvikki/ShaVi-1.0/assets/50227308/91cabea1-3046-493a-868a-a06413278b7c)](https://github.com/vatsvikki/ShaVi-1.0/issues/1#issue-2057942027)
     

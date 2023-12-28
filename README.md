@@ -101,12 +101,11 @@ Quit: Closes the package interface, concluding the session.
 For user support, a dedicated help section in the menu bar offers a tutorial video for step-by-step guidance, enhancing the user experience and promoting effective utilization of the software's capabilities.
 
 ## Tests
-Three synthetic geological models — Three Blocks, Marmosui, and Overthrust — are employed in three test cases with different dimensions and specified source and receiver configurations. 
+Synthetic geological models — Three Blocks, Marmosui, and Overthrust — are employed in test cases with different dimensions and specified source and receiver configurations. 
 
 #### Case 1: Three Block Model
 
 ![block_model](https://github.com/vatsvikki/ShaVi-1.0/assets/50227308/5fa4cefb-4165-4632-ab85-fc60ec901327)
-
 
 The Three-Block model serves as a straightforward test case for evaluating this
 package. The model’s dimensions are 500 x 1000 meters, as illustrated in figure,

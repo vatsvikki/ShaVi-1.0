@@ -21,6 +21,7 @@ tool easier but also lets you analyze results in real-time.
 - [Usage](#usage)
 - [Tests](#tests)
 - [Contribute](#contribute)
+- [Support](#support)
 
 ## Installation
 #### Prerequisites
@@ -159,7 +160,7 @@ We're excited to invite you to contribute to ShaVi-1.0.
 
 6. Push Changes
 
-Submit a Pull Request: Open a Pull Request on the original repository. Provide a clear description of your changes, and we'll review it.
+7. Submit a Pull Request: Open a Pull Request on the original repository. Provide a clear description of your changes, and we'll review it.
 
 ##### What Can You Contribute?
 
@@ -168,3 +169,8 @@ Submit a Pull Request: Open a Pull Request on the original repository. Provide a
 3. Documentation updates
 4. Bug reports or issue discussions
 
+## Support
+
+For assistance regarding the package, our team is available to address your inquiries and technical needs.
+
+You can contact us at vvats@iitk.ac.in or vikasvats17293@gmail.com

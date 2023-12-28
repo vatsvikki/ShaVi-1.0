@@ -20,7 +20,6 @@ tool easier but also lets you analyze results in real-time.
 - [Installation](#installation)
 - [Usage](#usage)
 - [Tests](#tests)
-- [Credits](#credits)
 - [Contribute](#contribute)
 
 ## Installation
@@ -142,15 +141,5 @@ Refer to the manual for detailed information on data specifications.
 
 Refer to the manual for detailed information on data specifications.
 
-## Credits
-
-List your collaborators, if any, with links to their GitHub profiles.
-
-If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
-
-If you followed tutorials, include links to those here as well.
-
 ## Contribute
-hello
 
-If you created an application or package and would like other developers to contribute it, you can include guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own if you'd prefer.

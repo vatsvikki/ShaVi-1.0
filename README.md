@@ -143,3 +143,28 @@ Refer to the manual for detailed information on data specifications.
 
 ## Contribute
 
+We're excited to invite you to contribute to ShaVi-1.0.
+
+##### Steps to contribute
+
+1. Fork the Repository
+
+2. Clone Your Fork
+
+3. Create a Branch
+
+4. Make Changes
+
+5. Commit Changes
+
+6. Push Changes
+
+Submit a Pull Request: Open a Pull Request on the original repository. Provide a clear description of your changes, and we'll review it.
+
+##### What Can You Contribute?
+
+1. Code improvements or bug fixes
+2. New features or enhancements
+3. Documentation updates
+4. Bug reports or issue discussions
+

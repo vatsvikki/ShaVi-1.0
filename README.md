@@ -44,6 +44,7 @@ Navigate to the `src` folder and compile the `main.c`
 ```
 gcc main.c -lm -fopenmp -o ../bin/fwi
 ```
+An executable file named `fwi` will be generated in the `bin` folder.
     
    [ ![figure_1](https://github.com/vatsvikki/ShaVi-1.0/assets/50227308/91cabea1-3046-493a-868a-a06413278b7c)](https://github.com/vatsvikki/ShaVi-1.0/issues/1#issue-2057942027)
     

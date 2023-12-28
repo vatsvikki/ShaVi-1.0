@@ -139,7 +139,7 @@ Refer to the tutorial for detailed information on data specifications.
 
 #### Case 3: Overthrust Model
 
-![marmousi_model](https://github.com/vatsvikki/ShaVi-1.0/assets/50227308/02e7d247-a4f1-4836-8f82-74323428ab43)
+![overthrust_model](https://github.com/vatsvikki/ShaVi-1.0/assets/50227308/fcfde493-a8bf-48d4-99b6-be3f655bc03f)
 
 Refer to the tutorial for detailed information on data specifications.
 

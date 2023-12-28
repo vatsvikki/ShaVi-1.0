@@ -19,8 +19,9 @@ tool easier but also lets you analyze results in real-time.
 
 - [Installation](#installation)
 - [Usage](#usage)
+- [Tests](#tests)
 - [Credits](#credits)
-- [License](#license)
+- [Contribute](#contribute)
 
 ## Installation
 #### Prerequisites
@@ -100,8 +101,31 @@ Quit: Closes the package interface, concluding the session.
 For user support, a dedicated help section in the menu bar offers a tutorial video for step-by-step guidance, enhancing the user experience and promoting effective utilization of the software's capabilities.
 
 ## Tests
+Three synthetic geological models — Three Blocks, Marmosui, and Overthrust — are employed in three test cases with different dimensions and specified source and receiver configurations. 
 
-Go the extra mile and write tests for your application. Then provide examples on how to run them here.
+#### Case 1: Three Block Model
+The Three-Block model serves as a straightforward test case for evaluating this
+package. The model’s dimensions are 500 x 1000 meters, as illustrated in figure,
+partitioned into small square grids with dimensions of 10 meters each. This model
+features three low-velocity blocks, each with a velocity of 1800 m/s, situated at different
+depths, having a uniform background velocity of 2000 m/s. The recovery process for
+this true model, commences with an initial model, depicted in
+figure.
+
+Note: The peak frequency of the observed data and source signature is 10 Hz.
+
+
+The necessary data for the inversion process is located in the folder labeled
+"test/case_1_block_model". Details of every file are given in the following table.
+
+|       Data       |      File name     |
+|------------------|--------------------|
+|   Observe Data   |    observe.txt     |
+|   Initial Model  | initial_model_block.txt|
+| Source Signature | source_amp.txt     |
+| Source Locations | source.txt         |
+|Receiver Locations| receiver.txt       |
+|   Parameters     |    parameter.txt   |
 
 ## Credits
 
@@ -111,6 +135,7 @@ If you used any third-party assets that require attribution, list the creators w
 
 If you followed tutorials, include links to those here as well.
 
-## How to Contribute
+## Contribute
+hello
 
 If you created an application or package and would like other developers to contribute it, you can include guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own if you'd prefer.

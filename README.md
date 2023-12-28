@@ -105,7 +105,8 @@ Three synthetic geological models — Three Blocks, Marmosui, and Overthrust —
 
 #### Case 1: Three Block Model
 
-https://github.com/vatsvikki/ShaVi-1.0/issues/2#issue-2057984517
+![block_model](https://github.com/vatsvikki/ShaVi-1.0/assets/50227308/5fa4cefb-4165-4632-ab85-fc60ec901327)
+
 
 The Three-Block model serves as a straightforward test case for evaluating this
 package. The model’s dimensions are 500 x 1000 meters, as illustrated in figure,

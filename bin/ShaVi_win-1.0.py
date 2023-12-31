@@ -82,8 +82,8 @@ def tick_mark(no_grid, grid_size, no_tick):
 
 def inversion():
     if ("obsr_data" and "src_amp") and ("src_loc" and "rcr_loc") and ("in_mdl" and "par_file") in globals():
-        #os.system("start fwi.exe" + " " + par_file  + " " + src_amp + " " + in_mdl + " " +  obsr_data + " " + src_loc + " " + rcr_loc)
-        os.system("./fwi.out" + " " + par_file  + " " + src_amp + " " + in_mdl + " " +  obsr_data + " " + src_loc + " " + rcr_loc + "&")
+        os.system("start fwi.exe" + " " + par_file  + " " + src_amp + " " + in_mdl + " " +  obsr_data + " " + src_loc + " " + rcr_loc)
+        #os.system("./fwi.out" + " " + par_file  + " " + src_amp + " " + in_mdl + " " +  obsr_data + " " + src_loc + " " + rcr_loc + "&")
         
     else:
         messagebox.showerror("Error", "Please load the required files")

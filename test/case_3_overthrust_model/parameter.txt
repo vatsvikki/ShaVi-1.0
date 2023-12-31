@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 number_sample	1500
 sampling_intrvl	1
 depth_model	150
@@ -15,3 +16,22 @@ obj_fun_l2_1	1
 upper_avoid	10
 bound_avoid	25
 data_order_rm_1	1
+=======
+number_sample	1500
+sampling_intrvl	1
+depth_model	150
+lateral_model	500
+grid_space	10	
+depth_source	3
+depth_receiver	3
+number_src	50
+number_rcr	400
+processors	1
+max_iteration	20
+boundary_key	1
+absorb_lay	20
+obj_fun_l2_1	1
+upper_avoid	10
+bound_avoid	25
+data_order_rm_1	1
+>>>>>>> 730043c2cbb36e5819c4966987a6e7f5546086b1

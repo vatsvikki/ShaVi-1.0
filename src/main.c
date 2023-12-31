@@ -98,38 +98,14 @@ int main(int argc, void **argv)
     /******************* read initial velocity ***********************/
     float *vel_synt;                                              
     vel_synt = (float *)calloc((grid_x * grid_y), sizeof(float)); 
-    if(data_order == 1)         //row_major == 1 or column_major == 0
+    FILE *read_synthetic;
+    read_synthetic = fopen(initial_model, "r");
+    for(int i = 0; i < (grid_x * grid_y); i++)
     {
-        printf("Array layout: Row-Major.\n");
-        FILE *read_synthetic;
-        read_synthetic = fopen(initial_model, "r");
-        for(int i = 0; i < (grid_x * grid_y); i++)
-        {
-            fscanf(read_synthetic, "%f", &vel_synt[i]);
-        }
-        fclose(read_synthetic);
+        fscanf(read_synthetic, "%f", &vel_synt[i]);
     }
-    else
-    {
-        printf("Array layout: Column-Major.\n");
-        float *vel_synt_temp;                                              
-        vel_synt_temp = (float *)calloc((grid_x * grid_y), sizeof(float)); 
-        FILE *read_synthetic_temp;
-        read_synthetic_temp = fopen(initial_model, "r");
-        for(int i = 0; i < (grid_x * grid_y); i++)
-        {
-            fscanf(read_synthetic_temp, "%f", &vel_synt_temp[i]);
-        }
-        fclose(read_synthetic_temp);
-        for (int i = 0; i < grid_x; i++)
-        {
-            for (int j = 0; j < grid_y; j++)
-            {
-            vel_synt[grid_y * i + j] = vel_synt_temp[grid_x * j + i];
-            }
-        }
-        free(vel_synt_temp);
-    }
+    fclose(read_synthetic);
+    
     /*****************************************************************/
 
     /****************************** read observe data ************************/
@@ -137,6 +113,7 @@ int main(int argc, void **argv)
     gather_real = (float *)calloc((n_src * ns * n_rcr), sizeof(float)); 
     if(data_order == 1)         //row_major == 1 or column_major == 0
     {
+        printf("Array layout: Row-Major.\n");
         FILE *read_real_data;
         read_real_data = fopen(observe, "r");
         for (int i = 0; i < (n_src * ns * n_rcr); i++)
@@ -147,6 +124,7 @@ int main(int argc, void **argv)
     }
     else
     {
+        printf("Array layout: Column-Major.\n");
         float *temp_gather;
         temp_gather = (float *)calloc((n_src * ns * n_rcr), sizeof(float));
         FILE *read_temp;
@@ -216,9 +194,30 @@ int main(int argc, void **argv)
     /***********************************************/
     
     float total_time = 0.0;
+    FILE *status_ptr;
+    status_ptr = fopen("status.txt", "w");
+    
+    fprintf(status_ptr, "############################# Full Waveform Inversion #############################\n");
+    /************* print receivers correspond to each shot*************/
+    fprintf(status_ptr, "*******************************************************************************\n");
+    
+    fprintf(status_ptr, "S*(position of source) -> R#(position of receiver 1) ... R#(position of receiver N)\n");
+    for(int i = 0; i < n_src; i++)
+    {
+        fprintf(status_ptr, "S*%d -> ", src_pos[i]);
+        for(int j = 0; j < n_rcr; j++)
+        {
+            fprintf(status_ptr, "R#%d ", rcr_position_collect[j * n_src + i]);
+        }
+        fprintf(status_ptr, "\n");
+    }
+    fprintf(status_ptr, "********************************************************************************\n");
+    
+    /******************************************************************/
     /*************************** iterative process started ***************************/
     for (int itr = 0; itr < maxitr; itr++)
     {
+    fprintf(status_ptr, "############################# Iteration %d #############################\n", itr + 1);    
 	printf("****************** Iteration %d is started *********************\n", itr); 
         /***** start computation time calculation ******/
         double itime, ftime, exec_time;
@@ -365,26 +364,27 @@ int main(int argc, void **argv)
          
                     //backward_field(rp, rcr_position, dt, dx, flip_residual, vel_synt, back_field, ns, grid_x, grid_y, tid, boundary_key, absorb_layer, upper_avoid, bound_avoid, normal_field_vec, gradu);
 
-                    backward_field(rp, rcr_position_collect, dt, dx, residual, vel_synt, back_field, ns, grid_x, grid_y, tid, boundary_key, absorb_layer, upper_avoid, bound_avoid, normal_field_vec, gradu, thread, n, n_rcr, n_src);
+                    backward_field(rp, rcr_position_collect, dt, dx, residual, vel_synt, back_field, ns, grid_x, grid_y, tid, boundary_key, absorb_layer, upper_avoid, bound_avoid, thread, n, n_rcr, n_src);
 
                     /*************************** gradient calculation *******************************************/
                     // gardient is calculated for a group of sources according to the available processors      //
                     // and save as gradu                                                                        //
                     // correlation of the forward and backward field                                            //
                     /********************************************************************************************/
-                    /*for (int smpl = 1; smpl < ns - 1; smpl++)
+                    for (int smpl = 1; smpl < ns - 1; smpl++)
                     {
-                        for (int i = 0; i < grid_x; i++)
+                        for (int i = upper_avoid; i < grid_x - bound_avoid - 1; i++)
                         {
-                            for (int j = 0; j < grid_y; j++)
+                            for (int j = bound_avoid; j < grid_y - bound_avoid - 1; j++)
                             {
-                                if (i >= upper_avoid && i <= grid_x - bound_avoid - 1 && j >= bound_avoid && j <= grid_y - bound_avoid - 1)
-                                    gradu[(tid * grid_x * grid_y) + grid_y * i + j] = gradu[(tid * grid_x * grid_y) + grid_y * i + j] - (2 / pow(vel_synt[grid_y * i + j], 3)) * back_field[(tid * grid_x * grid_y * ns) + grid_y * (((ns - 1) - smpl) * grid_x + i) + j] * ((normal_field_vec[(tid * grid_x * grid_y * ns) + grid_y * ((smpl + 1) * grid_x + i) + j] - 2 * normal_field_vec[(tid * grid_x * grid_y * ns) + grid_y * (smpl * grid_x + i) + j] + normal_field_vec[(tid * grid_x * grid_y * ns) + grid_y * ((smpl - 1) * grid_x + i) + j]) / (dt * dt));
+                            //if (i >= upper_avoid && i <= grid_x - bound_avoid - 1 && j >= bound_avoid && j <= grid_y - bound_avoid - 1)
+                                gradu[(tid * grid_x * grid_y) + grid_y * i + j] = gradu[(tid * grid_x * grid_y) + grid_y * i + j] - (2 / pow(vel_synt[grid_y * i + j], 3)) * back_field[(tid * grid_x * grid_y * ns) + grid_y * (((ns - 1) - smpl) * grid_x + i) + j] * ((normal_field_vec[(tid * grid_x * grid_y * ns) + grid_y * ((smpl + 1) * grid_x + i) + j] - 2 * normal_field_vec[(tid * grid_x * grid_y * ns) + grid_y * (smpl * grid_x + i) + j] + normal_field_vec[(tid * grid_x * grid_y * ns) + grid_y * ((smpl - 1) * grid_x + i) + j]) / (dt * dt));
                             }
                         }
-                    } */   
+                    }
                     /*******************************************************************************************/ 		
                 //}
+                
             #pragma omp barrier                
             }
             
@@ -552,26 +552,10 @@ int main(int argc, void **argv)
             for (int j = 0; j < grid_y; j++)
             {
                 vel_synt[grid_y * i + j] = vel_synt[grid_y * i + j] + alpha * gradient[grid_y * i + j];
-            }
+	    }
         }
         /******************************************************************/
 
-        /*char c;
-        FILE *status_gui_file;
-        status_gui_file = fopen("current_status_gui.txt", "r");
-        c = fgetc(status_gui_file);
-        while(c == 'b')
-        {
-            rewind(status_gui_file);
-            c = fgetc(status_gui_file);
-        }
-        fclose(status_gui_file);
-        FILE *status_main_file;
-        status_main_file = fopen("current_status_main.txt", "w");
-        fputc('b', status_main_file);  
-        rewind(status_gui_file);
-        fclose(status_main_file);
-        */
     	FILE *inverted_file;
     	inverted_file = fopen("../output/inverted/inverted_velocity.txt", "w");
     	for (int i = 0; i < grid_x; i++)
@@ -583,12 +567,7 @@ int main(int argc, void **argv)
         	fprintf(inverted_file, "\n");
     	}
     	fclose(inverted_file);
-        /*status_main_file = fopen("current_status_main.txt", "w");
-	    if(itr == maxitr - 1)
-		fputc('e', status_main_file);
-	    else
-        fputc('d', status_main_file);  
-        fclose(status_main_file);*/
+
 
         /************ open file to write objective function (globally to add every iteration output) ***********/
         FILE *convergence;
@@ -611,8 +590,24 @@ int main(int argc, void **argv)
         printf("Progress ");
         printf("%0.1lf percent\n", ceil((itr + 1) * (100.0 / maxitr)));
         printf("Computation time is %lf second\n", exec_time);
+        float norm_0;
+        if (itr == 0)
+            norm_0 = norm;
+
+        FILE *pro;
+        pro = fopen("progress.txt", "w");
+        fprintf(pro, "%0.1f", ceil((itr + 1) * (100.0 / maxitr)));
+        fclose(pro);
+        
+        fprintf(status_ptr, "################## Normalized objective function  %f ###################\n", norm / norm_0);
+        fprintf(status_ptr, "#################### Computation time is %lf second ###################\n", exec_time);
+        fprintf(status_ptr, "######################### Progress %0.1lf percent #####################\n", ceil((itr + 1) * (100.0 / maxitr)));
+        fprintf(status_ptr, "########################## Iteration %d completed ######################\n", itr + 1);
+
     }        
-    
+    fprintf(status_ptr, "################### Process is completed in %f seconds #################\n", total_time);
+    fprintf(status_ptr, "########################################################################\n");
+    fclose(status_ptr);        
     printf("Process is completed in %f seconds\n", total_time);
     printf("#######################################################################\n");
     /************************************ end of iterations *******************************/

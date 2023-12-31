@@ -1,13 +1,13 @@
 number_sample	1500
 sampling_intrvl	1
-depth_model	150
+depth_model	174
 lateral_model	500
 grid_space	10	
 depth_source	3
 depth_receiver	3
 number_src	50
 number_rcr	400
-processors	1
+processors	5
 max_iteration	20
 boundary_key	1
 absorb_lay	20

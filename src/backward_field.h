@@ -1,5 +1,5 @@
 //float backward_field(int src_x, int *rcr_position, float dt, float dx, float *src_term, float *c, float *field_vec, int ns, int grid_x, int grid_y, int tid, int boundary_key, int absorb_layer, int upper_avoid, int bound_avoid, float *normal_field_vec, float *gradu)
-float backward_field(int src_x, int *rcr_position_collect, float dt, float dx, float *residual, float *c, float *field_vec, int ns, int grid_x, int grid_y, int tid, int boundary_key, int absorb_layer, int upper_avoid, int bound_avoid, float *normal_field_vec, float *gradu, int thread, int n, int n_rcr, int n_src)
+float backward_field(int src_x, int *rcr_position_collect, float dt, float dx, float *residual, float *c, float *field_vec, int ns, int grid_x, int grid_y, int tid, int boundary_key, int absorb_layer, int upper_avoid, int bound_avoid, int thread, int n, int n_rcr, int n_src)
 {
     float *w;
     w = (float *)calloc((grid_x * grid_y), sizeof(float));
@@ -60,6 +60,7 @@ float backward_field(int src_x, int *rcr_position_collect, float dt, float dx, f
         }
         
     }
+    /*
     for (int smpl = 0; smpl < ns; smpl++)
     {
         for (int i = upper_avoid; i < grid_x - bound_avoid - 1; i++)
@@ -70,6 +71,6 @@ float backward_field(int src_x, int *rcr_position_collect, float dt, float dx, f
                         gradu[(tid * grid_x * grid_y) + grid_y * i + j] = gradu[(tid * grid_x * grid_y) + grid_y * i + j] - (2 / pow(c[grid_y * i + j], 3)) * field_vec[(tid * grid_x * grid_y * ns) + grid_y * (((ns - 1) - smpl) * grid_x + i) + j] * ((normal_field_vec[(tid * grid_x * grid_y * ns) + grid_y * ((smpl + 1) * grid_x + i) + j] - 2 * normal_field_vec[(tid * grid_x * grid_y * ns) + grid_y * (smpl * grid_x + i) + j] + normal_field_vec[(tid * grid_x * grid_y * ns) + grid_y * ((smpl - 1) * grid_x + i) + j]) / (dt * dt));
             }
         }
-    }
+    }*/
     //}
 }

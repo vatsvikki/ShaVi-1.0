@@ -82,11 +82,9 @@ def tick_mark(no_grid, grid_size, no_tick):
 
 def inversion():
     if ("obsr_data" and "src_amp") and ("src_loc" and "rcr_loc") and ("in_mdl" and "par_file") in globals():
-        #os.system("start D:\\fwi_version\\GUI_v1\\bin\\fwi.exe D:\\fwi_version\\GUI_v1\\example_1\\parameter_new.txt D:\\fwi_version\\GUI_v1\\example_1\\source_amp.txt D:\\fwi_version\\GUI_v1\\example_1\\initial_model.txt D:\\fwi_version\\GUI_v1\\example_1\\observe.txt D:\\fwi_version\\GUI_v1\\example_1\\source.txt D:\\fwi_version\\GUI_v1\\example_1\\receiver.txt")
-        os.system("start fwi.exe" +" " + par_file  + " " + src_amp + " " + in_mdl + " " +  obsr_data + " " + src_loc + " " + rcr_loc)
-        #os.system("/media/vikas/Data/GUI/FWI/src/a.out /media/vikas/Data/GUI/FWI/input/parameter_new.txt /media/vikas/Data/GUI/FWI/input/source_amp.txt /media/vikas/Data/GUI/FWI/input/initial_model.txt /media/vikas/Data/GUI/FWI/input/observe.txt /media/vikas/Data/GUI/FWI/input/source.txt /media/vikas/Data/GUI/FWI/input/receiver.txt")
-        #os.system("/media/vikas/Data/GUI/FWI/src/a.out" + " " + par_file  + " " + src_amp + " " + in_mdl + " " +  obsr_data + " " + src_loc + " " + rcr_loc + "&")
-        #print("/media/vikas/Data/GUI/FWI/src/a.out" + " " + par_file  + " " + src_amp + " " + in_mdl + " " +  obsr_data + " " + src_loc + " " + rcr_loc + "&")
+        #os.system("start fwi.exe" + " " + par_file  + " " + src_amp + " " + in_mdl + " " +  obsr_data + " " + src_loc + " " + rcr_loc)
+        os.system("./fwi.out" + " " + par_file  + " " + src_amp + " " + in_mdl + " " +  obsr_data + " " + src_loc + " " + rcr_loc + "&")
+        
     else:
         messagebox.showerror("Error", "Please load the required files")
         

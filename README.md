@@ -145,7 +145,7 @@ Refer to the manual for detailed information on data specifications.
 
 ## Contribute
 
-We're excited to invite you to contribute to ShaVi-1.0.
+We're excited to invite you to contribute the ShaVi-1.0.
 
 ##### Steps to contribute
 

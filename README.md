@@ -49,8 +49,14 @@ gcc main.c -lm -fopenmp -o ../bin/fwi
 An executable file named `fwi` will be generated in the `bin` folder. 
 
 Execute the `ShaVi-1.0.py` file to launch the interface by following the command below:
+
+For Windows OS:
 ```
-python ShaVi-1.0.py
+python ShaVi_win-1.0.py
+```
+For Linux OS:
+```
+python ShaVi_linux-1.0.py
 ```
 This Command will launch the interface of Shavi-1.0 as shown in figure.
     

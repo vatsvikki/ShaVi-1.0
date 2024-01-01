@@ -21,7 +21,7 @@ tool easier but also lets you analyze results in real-time.
 - [Installation](#installation)
 - [Usage](#usage)
 - [Tests](#tests)
-- [Contribute](#contribute)
+- [Contribution](#contribution)
 - [Support](#support)
 
 ## Installation

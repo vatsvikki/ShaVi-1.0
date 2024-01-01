@@ -66,8 +66,8 @@ def display():
 
         T.insert(END, data)
         file.close()
-        T.after(10000,display)
-        T.after(9999,clearToTextInput)  
+        T.after(20000,display)
+        T.after(19999,clearToTextInput)  
         progressBar['value'] = itr
         style.configure('text.Horizontal.TProgressbar',
                         text='Progress' + " " + itr + '%')

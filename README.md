@@ -50,11 +50,11 @@ An executable file named `fwi` will be generated in the `bin` folder.
 
 Execute the `ShaVi-1.0.py` file to launch the interface by following the command below:
 
-For Windows OS
+For Windows OS:
 ```
 python ShaVi_win-1.0.py
 ```
-For Linus OS
+For Linux OS:
 ```
 python ShaVi_linux-1.0.py
 ```

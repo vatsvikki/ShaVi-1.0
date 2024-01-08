@@ -40,7 +40,7 @@ defaultextension=".txt",filetypes=[("All Files","*.*"),("Text Documents","*.txt"
 
 def restart():
     root.destroy()
-    os.startfile("ShaVi-1.0.py")
+    os.startfile("ShaVi_linux-1.0.py")
 
 
 def quit_win():

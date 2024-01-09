@@ -36,8 +36,9 @@ Access the command prompt or terminal and proceed with the following steps.
 ```
 git clone https://github.com/vatsvikki/ShaVi-1.0.git
 ```
-#### Module installation
 ##### Step: 2
+#### Module installation
+
 ```
 cd <path_to_repository>/packages
 pip install -r dependencies.txt

@@ -31,7 +31,7 @@ tool easier but also lets you analyze results in real-time.
 3. [pip](https://pip.pypa.io/en/stable/installation/)
 
 
-Access the command prompt or terminal and proceed with the following steps.
+# Access the command prompt or terminal and proceed with the following steps.
 ## Setup
 
 #### Step: 1

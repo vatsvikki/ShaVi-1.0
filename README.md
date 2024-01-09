@@ -32,10 +32,12 @@ tool easier but also lets you analyze results in real-time.
 
 Access the command prompt or terminal and proceed with the following steps.
 #### Clone the repository
+##### Step: 1
 ```
 git clone https://github.com/vatsvikki/ShaVi-1.0.git
 ```
 #### Module installation
+##### Step: 2
 ```
 cd path_to_repository/packages
 pip install -r dependencies.txt
@@ -43,12 +45,15 @@ pip install -r dependencies.txt
 ## Usage
 
 Navigate to the `src` folder and compile the `main.c`
+##### Step: 3
 ```
 gcc main.c -lm -fopenmp -o ../bin/fwi
 ```
 An executable file named `fwi` will be generated in the `bin` folder. 
 
 Execute the `ShaVi-1.0.py` file to launch the interface by following the command below:
+
+##### Step: 4
 
 For Windows OS:
 ```

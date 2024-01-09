@@ -39,7 +39,7 @@ git clone https://github.com/vatsvikki/ShaVi-1.0.git
 #### Module installation
 ##### Step: 2
 ```
-cd path_to_repository/packages
+cd <path_to_repository>/packages
 pip install -r dependencies.txt
 ```
 ## Usage

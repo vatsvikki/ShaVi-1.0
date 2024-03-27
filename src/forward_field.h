@@ -1,4 +1,4 @@
-float forward_field(int src_x, int *src_y, int rp, float dt, float dx, float *src_term, float *c, float *field_vec, int ns, int grid_x, int grid_y, int tid, int boundary_key, int absorb_layer, float *gather)
+float forward_field(long long int  src_x, long long int  *src_y, long long int  rp, float dt, float dx, float *src_term, float *c, float *field_vec, long long int  ns, long long int  grid_x, long long int  grid_y, long long int  tid, long long int  boundary_key, long long int  absorb_layer, float *gather)
 {
     float *w;
     w = (float *)calloc((grid_x * grid_y), sizeof(float));
@@ -9,27 +9,27 @@ float forward_field(int src_x, int *src_y, int rp, float dt, float dx, float *sr
 
     if (boundary_key == 1)
     {
-        /*int N = absorb_layer / dx;*/
-        int N = absorb_layer;
-        int M = 5;
+        /*long long int  N = absorb_layer / dx;*/
+        long long int  N = absorb_layer;
+        long long int  M = 5;
         boundary_coefficient(grid_x, grid_y, N, M, w, a, b);
     }
 
     
 
-    int tid_ns_grid_x_grid_y = tid * ns * grid_x * grid_y;
+    long long int  tid_ns_grid_x_grid_y = tid * ns * grid_x * grid_y;
 
-    for (int i = 0; i < ns * grid_x * grid_y; i++)
+    for (long long int  i = 0; i < ns * grid_x * grid_y; i++)
     {
         field_vec[tid_ns_grid_x_grid_y + i] = 0.0;
     }
     
-    for (int smpl = 1; smpl < ns - 1; smpl++)
+    for (long long int  smpl = 1; smpl < ns - 1; smpl++)
     {
         field_vec[(tid * ns * grid_x * grid_y) + grid_y * (smpl * grid_x + src_x) + src_y[tid]] = field_vec[(tid * ns * grid_x * grid_y) + grid_y * (smpl * grid_x + src_x) + src_y[tid]] + src_term[smpl] / (dx * dx) * dt * dt;
-        for (int i = 0; i < grid_x; i++)
+        for (long long int  i = 0; i < grid_x; i++)
         {
-            for (int j = 0; j < grid_y; j++)
+            for (long long int  j = 0; j < grid_y; j++)
             {
                 if (smpl == 0 || smpl == ns - 1 || i <= 2 || i >= grid_x - 3 || j <= 2 || j >= grid_y - 3)
                 {
@@ -46,11 +46,17 @@ float forward_field(int src_x, int *src_y, int rp, float dt, float dx, float *sr
             }
         }
     }
-    for (int smpl = 0; smpl < ns; smpl++)
+    for (long long int  smpl = 0; smpl < ns; smpl++)
     {
-        for(int j = 0; j < grid_y; j++)
+        for(long long int  j = 0; j < grid_y; j++)
         {
            gather[(tid * ns * grid_y) + grid_y * smpl + j] = field_vec[(tid * ns * grid_x * grid_y) + grid_y * (smpl * grid_x + rp) + j];
         }
     }
+free(w);
+w = NULL;
+free(a);
+a = NULL;
+free(b);
+b = NULL;
 }

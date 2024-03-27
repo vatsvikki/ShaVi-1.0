@@ -67,20 +67,20 @@ int main(int argc, void **argv)
 
     /******************************************** read parameters from parameter file ****************************************************/
     char ts[100];
-    int ns, grid_x, grid_y, src_x, rp, n_src, n_rcr, thread, maxitr, boundary_key, absorb_layer, obj_fun, upper_avoid, bound_avoid, data_order;
+    long long int  ns, grid_x, grid_y, src_x, rp, n_src, n_rcr, thread, maxitr, boundary_key, absorb_layer, obj_fun, upper_avoid, bound_avoid, data_order;
     float dt, dx;
     FILE *para;
     para = fopen(parameter, "r"); 
-    fscanf(para, "%s %d %s %f %s %d %s %d %s %f %s %d %s %d %s %d %s %d %s %d %s %d %s %d %s %d %s %d %s %d %s %d %s %d", ts, &ns, ts, &dt, ts, &grid_x, ts, &grid_y, ts, &dx, ts, &src_x, ts, &rp, ts, &n_src, ts, &n_rcr, ts, &thread, ts, &maxitr, ts, &boundary_key, ts, &absorb_layer, ts, &obj_fun, ts, &upper_avoid, ts, &bound_avoid, ts, &data_order);
+    fscanf(para, "%s %lld %s %f %s %lld %s %lld %s %f %s %lld %s %lld %s %lld %s %lld %s %lld %s %lld %s %lld %s %lld %s %lld %s %lld %s %lld %s %lld", ts, &ns, ts, &dt, ts, &grid_x, ts, &grid_y, ts, &dx, ts, &src_x, ts, &rp, ts, &n_src, ts, &n_rcr, ts, &thread, ts, &maxitr, ts, &boundary_key, ts, &absorb_layer, ts, &obj_fun, ts, &upper_avoid, ts, &bound_avoid, ts, &data_order);
     fclose(para);
     /*************************************************************************************************************************************/
 
     /***************** print number of source and recivers ******************/
-    printf("Number of sources are: %d\nNumber of receivers for each shot are: %d\n", n_src, n_rcr);
+    printf("Number of sources are: %lld\nNumber of receivers for each shot are: %lld\n", n_src, n_rcr);
     /************************************************************************/
 
     /**************************** group of processors (decided on the basis of available processors) *****************************/
-    int n_g_s = n_src / thread;
+    long long int  n_g_s = n_src / thread;
     /*****************************************************************************************************************************/
 
     /******************** read source signature **********************/
@@ -88,7 +88,7 @@ int main(int argc, void **argv)
     src_term = (float *)calloc((ns), sizeof(float)); 
     FILE *read_source;
     read_source = fopen(source_amp, "r");
-    for (int i = 0; i < ns; i++)
+    for (long long int  i = 0; i < ns; i++)
     {
         fscanf(read_source, "%f", &src_term[i]);
     }
@@ -100,7 +100,7 @@ int main(int argc, void **argv)
     vel_synt = (float *)calloc((grid_x * grid_y), sizeof(float)); 
     FILE *read_synthetic;
     read_synthetic = fopen(initial_model, "r");
-    for(int i = 0; i < (grid_x * grid_y); i++)
+    for(long long int  i = 0; i < (grid_x * grid_y); i++)
     {
         fscanf(read_synthetic, "%f", &vel_synt[i]);
     }
@@ -116,7 +116,7 @@ int main(int argc, void **argv)
         printf("Array layout: Row-Major.\n");
         FILE *read_real_data;
         read_real_data = fopen(observe, "r");
-        for (int i = 0; i < (n_src * ns * n_rcr); i++)
+        for (long long int  i = 0; i < (n_src * ns * n_rcr); i++)
         {
             fscanf(read_real_data, "%f", &gather_real[i]);
         }
@@ -129,16 +129,16 @@ int main(int argc, void **argv)
         temp_gather = (float *)calloc((n_src * ns * n_rcr), sizeof(float));
         FILE *read_temp;
         read_temp = fopen(observe, "r");
-        for (int i = 0; i < (n_src * ns * n_rcr); i++)
+        for (long long int  i = 0; i < (n_src * ns * n_rcr); i++)
         {
             fscanf(read_temp, "%f", &temp_gather[i]);
         }
         fclose(read_temp);
-        for(int k = 0; k < n_src; k++)
+        for(long long int  k = 0; k < n_src; k++)
         {
-            for (int i = 0; i < ns; i++)
+            for (long long int  i = 0; i < ns; i++)
             {
-                for (int j = 0; j < n_rcr; j++)
+                for (long long int  j = 0; j < n_rcr; j++)
                 {
                     gather_real[(k * ns * (n_rcr)) + ((n_rcr) * i + j)] = temp_gather[(k * ns * n_rcr) + (ns * j + i)];
                 }
@@ -149,25 +149,25 @@ int main(int argc, void **argv)
     /***************************************************************************/
 
     /***********************read source position file*************************/
-    int *src_pos;
-    src_pos = (int *)calloc(n_src, sizeof(int));
+    long long int  *src_pos;
+    src_pos = (long long int  *)calloc(n_src, sizeof(long long int ));
     FILE *read_source_pos;
     read_source_pos = fopen(source_pos, "r");
-    for(int i = 0; i < n_src; i++)
+    for(long long int  i = 0; i < n_src; i++)
     {
-	    fscanf(read_source_pos, "%d", &src_pos[i]);
+	    fscanf(read_source_pos, "%lld", &src_pos[i]);
     }
     fclose(read_source_pos);
     /*************************************************************************/
 
     /***********************read receiver position file************************/
-    int *rcr_position_collect;
-    rcr_position_collect = (int *)calloc(n_src * n_rcr, sizeof(int));
+    long long int  *rcr_position_collect;
+    rcr_position_collect = (long long int  *)calloc(n_src * n_rcr, sizeof(long long int ));
     FILE *read_receiver_pos;
     read_receiver_pos = fopen(receiver_pos, "r");
-    for(int i = 0; i < n_src * n_rcr; i++)
+    for(long long int  i = 0; i < n_src * n_rcr; i++)
     {
-	    fscanf(read_receiver_pos, "%d", &rcr_position_collect[i]);
+	    fscanf(read_receiver_pos, "%lld", &rcr_position_collect[i]);
     }
     fclose(read_receiver_pos);
     /*************************************************************************/
@@ -175,12 +175,12 @@ int main(int argc, void **argv)
     /************* print receivers correspond to each shot*************/
     printf("*******************************************************************************\n");
     printf("S*(position of source) -> R#(position of receiver 1) ... R#(position of receiver N)\n");
-    for(int i = 0; i < n_src; i++)
+    for(long long int  i = 0; i < n_src; i++)
     {
-        printf("S*%d -> ", src_pos[i]);
-        for(int j = 0; j < n_rcr; j++)
+        printf("S*%lld -> ", src_pos[i]);
+        for(long long int  j = 0; j < n_rcr; j++)
         {
-            printf("R#%d ", rcr_position_collect[j * n_src + i]);
+            printf("R#%lld ", rcr_position_collect[j * n_src + i]);
         }
         printf("\n");
     }
@@ -202,12 +202,12 @@ int main(int argc, void **argv)
     fprintf(status_ptr, "*******************************************************************************\n");
     
     fprintf(status_ptr, "S*(position of source) -> R#(position of receiver 1) ... R#(position of receiver N)\n");
-    for(int i = 0; i < n_src; i++)
+    for(long long int  i = 0; i < n_src; i++)
     {
-        fprintf(status_ptr, "S*%d -> ", src_pos[i]);
-        for(int j = 0; j < n_rcr; j++)
+        fprintf(status_ptr, "S*%lld -> ", src_pos[i]);
+        for(long long int  j = 0; j < n_rcr; j++)
         {
-            fprintf(status_ptr, "R#%d ", rcr_position_collect[j * n_src + i]);
+            fprintf(status_ptr, "R#%lld ", rcr_position_collect[j * n_src + i]);
         }
         fprintf(status_ptr, "\n");
     }
@@ -215,15 +215,15 @@ int main(int argc, void **argv)
     
     /******************************************************************/
     /*************************** iterative process started ***************************/
-    for (int itr = 0; itr < maxitr; itr++)
+    for (long long int  itr = 0; itr < maxitr; itr++)
     {
-    fprintf(status_ptr, "############################# Iteration %d #############################\n", itr + 1);    
-	printf("****************** Iteration %d is started *********************\n", itr); 
+    fprintf(status_ptr, "############################# Iteration %lld #############################\n", itr + 1);    
+	printf("****************** Iteration %lld is started *********************\n", itr); 
         /***** start computation time calculation ******/
         double itime, ftime, exec_time;
         itime = omp_get_wtime();
 
-        int src_y[thread];      // source positions on surface for each group of source
+        long long int  src_y[thread];      // source positions on surface for each group of source
         
         float *normal_field_vec;
         normal_field_vec = (float *)calloc((thread * ns * grid_x * grid_y), sizeof(float));      // initialize the forward field
@@ -247,7 +247,7 @@ int main(int argc, void **argv)
 
         // part: 1
         /************************ divide the work among the group of processors for gradient calculation ******************************/
-        for (int n = 0; n < n_g_s; n++) // n = number of group of processor, n_g_s = total number of groups.
+        for (long long int  n = 0; n < n_g_s; n++) // n = number of group of processor, n_g_s = total number of groups.
         {
             float *gradu;                                                               // temporary memory to store gradient for n procesors
             gradu = (float *)calloc((thread * grid_x * grid_y), sizeof(float));         // temp file to store gradient for n processors
@@ -279,7 +279,7 @@ int main(int argc, void **argv)
             /********* prallel block is started to calculate the gradient for n shots ******/
             #pragma omp parallel
             {
-                int tid;                                                            // thread ID
+                long long int  tid;                                                            // thread ID
                 tid = omp_get_thread_num();                                         // set thread ID
                 misfit[tid] = 0.0;                                                  // misfit initialize
                 src_y[tid] = src_pos[tid + thread * (n)];                           // source position allocated to each processor                                
@@ -306,9 +306,9 @@ int main(int argc, void **argv)
                 // helpfull in calculation of CFWI                                                            // 
                 // reference:                                                                                //
                 /*********************************************************************************************/
-                for (int smpl = 0; smpl < ns; smpl++)
+                for (long long int  smpl = 0; smpl < ns; smpl++)
                 {
-                    for (int j = 0; j < n_rcr; j++)
+                    for (long long int  j = 0; j < n_rcr; j++)
                     {
                         sum_obs[n_rcr * tid + j] = sum_obs[n_rcr * tid + j] + pow(gather_real[((n) * thread * (ns * n_rcr)) + (tid * ns * n_rcr) + n_rcr * smpl + j], 2);
                         sum_pred[n_rcr * tid + j] = sum_pred[n_rcr * tid + j] + pow(synt_data[(tid * ns * n_rcr) + n_rcr * smpl + j], 2);
@@ -320,9 +320,9 @@ int main(int argc, void **argv)
                 /*********************************** objective function calculation ****************************************/
                 // if (obj_fn == 1), objecitve function is l2 norm, otherwise cross-correlation objective function        //
                 /***********************************************************************************************************/
-                for (int smpl = 0; smpl < ns; smpl++)
+                for (long long int  smpl = 0; smpl < ns; smpl++)
                 {
-                    for (int j = 0; j < n_rcr; j++)
+                    for (long long int  j = 0; j < n_rcr; j++)
                     {
                         if (obj_fun == 1)        // 1 for L2 norm and 0 for cros-correlation
                         {
@@ -341,11 +341,11 @@ int main(int argc, void **argv)
                 /*************************************************************************************************************/
                 // calculation of time reversal of residual field & receiver position from input file                        //
                 /*************************************************************************************************************/
-                //int rcr[thread];
+                //long long int  rcr[thread];
                 //for(rcr[tid] = 0; rcr[tid] < n_rcr; rcr[tid]++)
                 //{
 			        //rcr_position[tid] = rcr_position_collect[(n) * thread + rcr[tid] * n_src + tid];
-                    /*for (int smpl = 0; smpl < ns; smpl++)
+                    /*for (long long int  smpl = 0; smpl < ns; smpl++)
                     {
                         flip_residual[tid * ns + smpl] = residual[(tid * ns * n_rcr) + (ns - smpl - 1) * n_rcr + rcr[tid]];
                     }*/
@@ -371,11 +371,11 @@ int main(int argc, void **argv)
                     // and save as gradu                                                                        //
                     // correlation of the forward and backward field                                            //
                     /********************************************************************************************/
-                    for (int smpl = 1; smpl < ns - 1; smpl++)
+                    for (long long int  smpl = 1; smpl < ns - 1; smpl++)
                     {
-                        for (int i = upper_avoid; i < grid_x - bound_avoid - 1; i++)
+                        for (long long int  i = upper_avoid; i < grid_x - bound_avoid - 1; i++)
                         {
-                            for (int j = bound_avoid; j < grid_y - bound_avoid - 1; j++)
+                            for (long long int  j = bound_avoid; j < grid_y - bound_avoid - 1; j++)
                             {
                             //if (i >= upper_avoid && i <= grid_x - bound_avoid - 1 && j >= bound_avoid && j <= grid_y - bound_avoid - 1)
                                 gradu[(tid * grid_x * grid_y) + grid_y * i + j] = gradu[(tid * grid_x * grid_y) + grid_y * i + j] - (2 / pow(vel_synt[grid_y * i + j], 3)) * back_field[(tid * grid_x * grid_y * ns) + grid_y * (((ns - 1) - smpl) * grid_x + i) + j] * ((normal_field_vec[(tid * grid_x * grid_y * ns) + grid_y * ((smpl + 1) * grid_x + i) + j] - 2 * normal_field_vec[(tid * grid_x * grid_y * ns) + grid_y * (smpl * grid_x + i) + j] + normal_field_vec[(tid * grid_x * grid_y * ns) + grid_y * ((smpl - 1) * grid_x + i) + j]) / (dt * dt));
@@ -390,37 +390,46 @@ int main(int argc, void **argv)
             
             /***************** gradient is calculated for n shots ************************/
 
-            for (int i = 0; i < (thread * ns * (n_rcr)); i++)
+            for (long long int  i = 0; i < (thread * ns * (n_rcr)); i++)
             {
                 fprintf(synt_data_write, "%f\n", synt_data[i]);
                 gather_step_length[n * (thread * ns * (n_rcr)) + i] = synt_data[i];                 // synthetic gather saved for step length calculation
             }
             
-            for (int tid = 0; tid < thread; tid++)
+            for (long long int  tid = 0; tid < thread; tid++)
             {
                 norm = norm + misfit[tid];
             }	        
 
             // gradient summation for all sources
-            for (int tid = 0; tid < thread; tid++)
+            for (long long int  tid = 0; tid < thread; tid++)
             {
-                for (int i = 0; i < grid_x; i++)
+                for (long long int  i = 0; i < grid_x; i++)
                 {
-                    for (int j = 0; j < grid_y; j++)
+                    for (long long int  j = 0; j < grid_y; j++)
                     {
                         gradient[grid_y * i + j] = gradient[grid_y * i + j] + gradu[(tid * grid_x * grid_y) + grid_y * i + j];
                     }
                 }
             }
             free(gradu);
+            gradu = NULL;
             free(gather_synt);
+            gather_synt = NULL;
             free(synt_data);
+            synt_data = NULL;
             free(residual);
-            free(flip_residual);   
-            free(back_field);        
+            residual = NULL;
+            free(flip_residual);
+            flip_residual = NULL;   
+            free(back_field);    
+            back_field = NULL;    
             free(sum_obs);
+            sum_obs = NULL;
             free(sum_pred);
+            sum_pred = NULL;
             free(sum_obs_pred);
+            sum_obs_pred = NULL;
         }
         /*********************************************************** gradient calculated for every source completed ************************************************************************/
 	    
@@ -430,9 +439,9 @@ int main(int argc, void **argv)
         /**************** absolute value of gradient ***************************/
         float *grad_abs;
         grad_abs = (float *)calloc((grid_x * grid_y), sizeof(float)); // absolute value of the gradient
-        for (int i = 0; i < grid_x; i++)
+        for (long long int  i = 0; i < grid_x; i++)
         {
-            for (int j = 0; j < grid_y; j++)
+            for (long long int  j = 0; j < grid_y; j++)
             {
                 grad_abs[grid_y * i + j] = fabs(gradient[grid_y * i + j]);
             }
@@ -442,6 +451,7 @@ int main(int argc, void **argv)
         float maximum_gradient;
         maximum_gradient = largest(grad_abs, grid_x, grid_y);               // maximum value in gradient matrix
         free(grad_abs);
+        grad_abs = NULL;
         
         float maximum_vel;
         maximum_vel = largest(vel_synt, grid_x, grid_y);                    // maximum value from the velocity profile
@@ -451,7 +461,7 @@ int main(int argc, void **argv)
         float alpha11 = 0.0;
         float alpha22 = 0.0;
 
-	    for (int n = 0; n < n_g_s; n++)
+	    for (long long int  n = 0; n < n_g_s; n++)
         {
             float *mk_plus_edk;
             mk_plus_edk = (float *)calloc((grid_x * grid_y), sizeof(float)); // perturbed velocity for step length calculation
@@ -473,16 +483,16 @@ int main(int argc, void **argv)
 
             #pragma omp parallel
             {
-                int tid;
+                long long int  tid;
                 tid = omp_get_thread_num();
                 alpha1[tid] = 0.0;
                 alpha2[tid] = 0.0;
                 src_y[tid] = src_pos[tid + thread * (n)];                                       // source position allocated to each processor
 
                 /*****************************velocity_model + epsilon X gradientt***************************/
-                for (int i = 0; i < grid_x; i++)
+                for (long long int  i = 0; i < grid_x; i++)
                 {
-                    for (int j = 0; j < grid_y; j++)
+                    for (long long int  j = 0; j < grid_y; j++)
                     {
                         mk_plus_edk[grid_y * i + j] = vel_synt[grid_y * i + j] + epsilon * gradient[grid_y * i + j];
                     }
@@ -509,18 +519,18 @@ int main(int argc, void **argv)
                 /************************************************************************************/
 
                 /*************************** synthetic_data(mkplusedk) - gather_step_length*****************************/
-                for (int smpl = 0; smpl < ns; smpl++)
+                for (long long int  smpl = 0; smpl < ns; smpl++)
                 {
-                    for (int j = 0; j < n_rcr; j++)
+                    for (long long int  j = 0; j < n_rcr; j++)
                     {
                         jkdek[(tid * n_rcr * ns) + n_rcr * smpl + j] = (synt_data_mkpedk[(tid * n_rcr * ns) + n_rcr * smpl + j] - gather_step_length[((n) * thread * (ns * n_rcr)) + (tid * ns * n_rcr) + n_rcr * smpl + j]) / epsilon;
                     }
                 }
                 /*******************************************************************************************************/
 
-                for (int smpl = 0; smpl < ns; smpl++)
+                for (long long int  smpl = 0; smpl < ns; smpl++)
                 {
-                    for (int j = 0; j < n_rcr; j++)
+                    for (long long int  j = 0; j < n_rcr; j++)
                     {
                         alpha2[tid] = alpha2[tid] + (jkdek[(tid * n_rcr * ns) + n_rcr * smpl + j] * jkdek[(tid * n_rcr * ns) + n_rcr * smpl + j]);
                         alpha1[tid] = alpha1[tid] + (jkdek[(tid * n_rcr * ns) + n_rcr * smpl + j] * (gather_real[((n) * thread * (ns * n_rcr)) + (tid * n_rcr * ns) + n_rcr * smpl + j] - gather_step_length[((n) * thread * (ns * n_rcr)) + (tid * ns * n_rcr) + n_rcr * smpl + j]));
@@ -530,39 +540,45 @@ int main(int argc, void **argv)
             #pragma omp barrier
             }
 
-            for (int tid = 0; tid < thread; tid++)
+            for (long long int  tid = 0; tid < thread; tid++)
             {
                 alpha11 = alpha11 + alpha1[tid];
                 alpha22 = alpha22 + alpha2[tid];
             }
             free(mk_plus_edk);
+            mk_plus_edk = NULL;
             free(gather_mkpedk);
+            gather_mkpedk = NULL;
             free(synt_data_mkpedk);
+            synt_data_mkpedk = NULL;
             free(jkdek);
+            jkdek = NULL;
             free(alpha1);
+            alpha1 = NULL;
             free(alpha2);
+            alpha2 = NULL;
         }
         
         float alpha = 0.0;
         alpha = alpha11 / alpha22;    
 
         /*********************** model updation ***************************/
-        for (int i = 0; i < grid_x; i++)
+        for (long long int  i = 0; i < grid_x; i++)
         {
-            for (int j = 0; j < grid_y; j++)
+            for (long long int  j = 0; j < grid_y; j++)
             {
-                vel_synt[grid_y * i + j] = vel_synt[grid_y * i + j] + alpha * gradient[grid_y * i + j];
+                    vel_synt[grid_y * i + j] = vel_synt[grid_y * i + j] + alpha * gradient[grid_y * i + j];
 	    }
         }
         /******************************************************************/
 
     	FILE *inverted_file;
     	inverted_file = fopen("../output/inverted/inverted_velocity.txt", "w");
-    	for (int i = 0; i < grid_x; i++)
+    	for (long long int  i = 0; i < grid_x; i++)
     	{
-        	for (int j = 0; j < grid_y; j++)
+        	for (long long int  j = 0; j < grid_y; j++)
         	{
-            	fprintf(inverted_file, "%0.50f\t", vel_synt[grid_y * i + j]);
+            	fprintf(inverted_file, "%0.5f\t", vel_synt[grid_y * i + j]);
         	}
         	fprintf(inverted_file, "\n");
     	}
@@ -577,7 +593,9 @@ int main(int argc, void **argv)
         /******************************************************************************************************/
         
         free(gather_step_length);
+        gather_step_length = NULL;
         free(normal_field_vec);
+        normal_field_vec = NULL;
         fclose(synt_data_write);
         /************computation time*****************/
         ftime = omp_get_wtime();
@@ -585,7 +603,7 @@ int main(int argc, void **argv)
         /**********************************************/
         total_time = total_time + exec_time;
         /**************** print output *********************/
-        printf("############################# Iteration %d #############################\n", itr);
+        printf("############################# Iteration %lld #############################\n", itr);
         printf("Objective function is: %0.3f\n", norm);
         printf("Progress ");
         printf("%0.1lf percent\n", ceil((itr + 1) * (100.0 / maxitr)));
@@ -602,7 +620,7 @@ int main(int argc, void **argv)
         fprintf(status_ptr, "################## Normalized objective function  %f ###################\n", norm / norm_0);
         fprintf(status_ptr, "#################### Computation time is %lf second ###################\n", exec_time);
         fprintf(status_ptr, "######################### Progress %0.1lf percent #####################\n", ceil((itr + 1) * (100.0 / maxitr)));
-        fprintf(status_ptr, "########################## Iteration %d completed ######################\n", itr + 1);
+        fprintf(status_ptr, "########################## Iteration %lld completed ######################\n", itr + 1);
 
     }        
     fprintf(status_ptr, "################### Process is completed in %f seconds #################\n", total_time);
@@ -613,8 +631,11 @@ int main(int argc, void **argv)
     /************************************ end of iterations *******************************/
 
     free(src_term);
-	free(gather_real);
-	free(vel_synt);    
+    src_term = NULL;
+    free(gather_real);
+    gather_real = NULL;
+    free(vel_synt);   
+    vel_synt = NULL;
     return 0;
 }
 

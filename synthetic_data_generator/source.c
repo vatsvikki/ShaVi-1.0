@@ -4,7 +4,7 @@
 #include "source_ricker.h"
 int main(int argc, void **argv)
 {
-	float freq = 10;
+	float freq = 24;
 	if (argc < 2)
     {
     	printf("Usage: excecutable <parameter>");

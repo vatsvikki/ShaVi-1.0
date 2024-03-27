@@ -1,9 +1,9 @@
-float boundary_coefficient(int grid_x, int grid_y, float N, float M, float *w, float *a, float *b)
+float boundary_coefficient(long long int grid_x, long long int grid_y, float N, float M, float *w, float *a, float *b)
 {
     float alpha = 1.5 + 0.07 * (N - M);
-    for (int i = 0; i < grid_x; i++)
+    for (long long int i = 0; i < grid_x; i++)
     {
-        for (int j = 0; j < grid_y; j++)
+        for ( long long int j = 0; j < grid_y; j++)
         {
             if (j < N)
             {
@@ -13,9 +13,9 @@ float boundary_coefficient(int grid_x, int grid_y, float N, float M, float *w, f
         }
     }
 
-    for (int i = 0; i < grid_x; i++)
+    for (long long int i = 0; i < grid_x; i++)
     {
-        for (int j = i; j < grid_y - i; j++)
+        for (long long int j = i; j < grid_y - i; j++)
         {
             if (i < N)
             {
@@ -24,9 +24,9 @@ float boundary_coefficient(int grid_x, int grid_y, float N, float M, float *w, f
         }
     }
 
-    for (int i = 0; i < grid_x; i++)
+    for (long long int i = 0; i < grid_x; i++)
     {
-        for (int j = 0; j < grid_y; j++)
+        for (long long int j = 0; j < grid_y; j++)
         {
             if (i >= grid_x - M)
                 w[i * grid_y + j] = 1.0; 
@@ -39,9 +39,9 @@ float boundary_coefficient(int grid_x, int grid_y, float N, float M, float *w, f
 
     /*FILE *fabc;
     fabc = fopen("../output/temp_data/abc.txt", "w");
-    for (int i = 0; i < grid_x; i++)
+    for (long long int i = 0; i < grid_x; i++)
     {
-        for (int j = 0; j < grid_y; j++)
+        for (long long int j = 0; j < grid_y; j++)
         {
             fprintf(fabc, "%f\t", w[i * grid_y + j]);
         }
@@ -52,9 +52,9 @@ float boundary_coefficient(int grid_x, int grid_y, float N, float M, float *w, f
     aw = fopen("../output/temp_data/a.txt", "w");
     FILE *bw;
     bw = fopen("../output/temp_data/b.txt", "w");*/
-    for (int i = 0; i < grid_x; i++)
+    for (long long int i = 0; i < grid_x; i++)
     {
-        for (int j = 0; j < grid_y; j++)
+        for (long long int j = 0; j < grid_y; j++)
         {
             if (i <= grid_x / 2 && j <= grid_y / 2)
             {

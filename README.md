@@ -191,7 +191,7 @@ For assistance regarding the package, our team is available to address your inqu
 
 You can contact us at vvats@iitk.ac.in or vikasvats17293@gmail.com
 
-## Cite this document
+## Cite this package
 ### Formatted Citation
 Vikas, Roy, S., & Ghosal, D. (2024). ShaVi-1.0: An interface enabled open source 2D acoustic full waveform inversion package. Computers & Geosciences, 187, 105592. https://doi.org/10.1016/j.cageo.2024.105592
 
